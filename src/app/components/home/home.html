@@ -1,0 +1,18 @@
+<div class="container d-flex flex-column justify-content-center align-items-center" style="height: 450px;">
+    <h1>{{ TituloSistema }}</h1>
+    <h2>Bem-vindo!</h2>
+    <p>Total de autores cadastrados: {{autoresService.totalAutores()}} </p>
+</div>
+<ul class="mt-2 list-group">
+    @for (item of autoresService.autores(); track item.id; let i = $index) {
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span>
+            {{ item.nome }}
+            {{ item.nacionalidade }}
+            {{ item.anodeNascimento }}
+        </span>
+    }
+            @empty {
+    <li class="list-group-item">Nenhum autor cadastrado.</li>
+    }
+</ul>

@@ -1,0 +1,36 @@
+@if (emEdicao) {
+    <h2>Editando item n° {{itemId}}</h2>
+}@else {
+    <h2>Novo item</h2>
+}
+
+<form [formGroup]="formItem" (ngSubmit)="salvar()">
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome do autor:</label>
+        <input type="text" class="form-control" id="nome" formControlName="nome" />
+    </div>
+    @if (this.formItem.value.nome==''||this.formItem.value.nome==null) {
+    <p class="text-danger">Nome inválido</p>
+    }
+    <div class="mb-3">
+        <label for="nacionalidade" class="form-label">Nacionalidade:</label>
+        <input type="text" class="form-control" id="nacionalidade" formControlName="nacionalidade" />
+    </div>
+    @if (this.formItem.value.nacionalidade==''||this.formItem.value.nacionalidade==null) {
+    <p class="text-danger">Nacionalidade inválida</p>
+    }
+    <div class="mb-3">
+        <label for="anodeNascimento" class="form-label">Ano de nascimento:</label>
+        <input type="number" class="form-control" id="anodeNascimento" formControlName="anodeNascimento" />
+    </div>
+    @if (this.formItem.value.anodeNascimento==0||this.formItem.value.anodeNascimento==null) {
+    <p class="text-danger">Ano inválido</p>
+    }
+
+    @if (this.formItem.value.nome==''||this.formItem.value.nacionalidade==''||this.formItem.value.anodeNascimento==0||this.formItem.value.anodeNascimento==null) {
+        <button type="button" class="btn btn-primary" disabled>Desabilitado</button>
+    }
+    @else {
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    }
+</form>
