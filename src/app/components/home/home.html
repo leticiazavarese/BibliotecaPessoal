@@ -11,8 +11,16 @@
             {{ item.nacionalidade }}
             {{ item.anodeNascimento }}
         </span>
-    }
-            @empty {
+        <div>
+            <a class="btn btn-sm btn-primary" [routerLink]="['/autor', item.id, 'editar']">
+                Editar
+            </a>
+            <button class="btn btn-sm btn-danger" (click)="remover(item)">
+                Remover
+            </button>
+        </div>
+        }
+        @empty {
     <li class="list-group-item">Nenhum autor cadastrado.</li>
     }
 </ul>

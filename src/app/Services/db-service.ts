@@ -6,7 +6,7 @@ import { Livro} from '../models/livro.model';
 @Service()
 export class DbService extends Dexie{
   itens!: Table<Autor,number>;
-  jogos!: Table<Livro, number>;
+  livros!: Table<Livro, number>;
 
   constructor(){
     super('CatalogoItensDB');

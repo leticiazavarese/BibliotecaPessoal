@@ -1,0 +1,55 @@
+
+@if (emEdicao) {
+  <h2>Editando jogo nº {{ itemId }}</h2>
+} @else {
+  <h2>Novo jogo</h2>
+}
+
+<form [formGroup]="formitem" (ngSubmit)="salvar()">
+  <div class="mb-3">
+    <label for="titulo" class="form-label">Nome do livro:</label>
+    <input type="text" class="form-control" id="titulo" formControlName="titulo" />
+  </div>
+  @if (this.formitem.value.titulo==null||this.formitem.value.titulo=='') {
+        <p class="text-danger">titulo invalido</p>
+    }
+  <div class="mb-3">
+    <label for="genero" class="form-label">Genero:</label>
+    <select class="form-select" id="genero" formControlName="genero">
+      <option [ngValue]="''">Selecione um genero</option>
+      @for (status of status; track status) {
+        <option [ngValue]="status">{{ status }}</option>
+      }
+    </select>
+  </div>
+  
+  @if (!this.formitem.value.genero) {
+        <p class="text-danger">genero invalido</p>
+    }
+  <div class="mb-3">
+    <label for="anoPublicacao" class="form-label">Ano de publicação:</label>
+    <input type="number" class="form-control" id="anoPublicacao" formControlName="anoPublicacao" />
+  </div>
+  @if (this.formitem.value.anoPublicacao==null||this.formitem.value.anoPublicacao==0) {
+        <p class="text-danger">ano invalido</p>
+    }
+   <div class="mb-3">
+    <label for="autorId" class="form-label">Autor:</label>
+    <select class="form-select" id="autor" formControlName="autorId">
+      <option [ngValue]="0">Selecione um autor
+      </option>
+      @for (autor of autoresService.autores() ; track autor.id) {
+        <option [ngValue]="autor.id">{{ autor.nome }}</option>
+      }
+    </select>
+  </div>
+   @if (!this.formitem.value.autorId) {
+        <p class="text-danger">Autor invalido</p>
+    }
+  @if (this.formitem.value.titulo=='' || this.formitem.value.anoPublicacao==0 || !this.formitem.value.genero||!this.formitem.value.autorId) {
+        <button type="button" class="btn btn-primary" disabled>Desabilitado</button>
+    }
+    @else {
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    }
+</form>
